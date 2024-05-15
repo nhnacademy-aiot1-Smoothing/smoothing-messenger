@@ -27,7 +27,7 @@ public class DoorayHookSendServiceImpl implements DoorayHookSendService {
     private String hookRoutingKey;
 
     @Override
-    public void send(DoorayHookDTO doorayHookDTO) {
+    public void sendToQueue(DoorayHookDTO doorayHookDTO) {
 
         log.info("Send dooray message : {}", doorayHookDTO.getMessage());
         rabbitTemplate.convertAndSend(hookExchangeName, hookRoutingKey, doorayHookDTO);
