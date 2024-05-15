@@ -1,18 +1,19 @@
 package live.smoothing.messenger.config;
 
 import live.smoothing.messenger.hook.DoorayHookSender;
-import live.smoothing.messenger.properties.DoorayHookProperties;
+import live.smoothing.messenger.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Configuration
 @RequiredArgsConstructor
 public class DoorayHookConfig {
 
-
-    private final DoorayHookProperties properties;
+    private final UserService userService;
 
     @Bean
     public RestTemplate restTemplate() {
@@ -23,6 +24,7 @@ public class DoorayHookConfig {
     @Bean
     public DoorayHookSender doorayHookSender(RestTemplate restTemplate) {
 
-        return new DoorayHookSender(restTemplate, properties.getHookUrl());
+        List<String> urls = userService.getHookUrls(1);
+        return new DoorayHookSender(restTemplate, urls);
     }
 }
