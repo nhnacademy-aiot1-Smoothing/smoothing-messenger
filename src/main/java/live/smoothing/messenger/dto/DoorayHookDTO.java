@@ -1,5 +1,6 @@
 package live.smoothing.messenger.dto;
 
+import live.smoothing.messenger.hook.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,5 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class DoorayHookDTO {
 
+    private UserRole userRole;
     private String message;
 }

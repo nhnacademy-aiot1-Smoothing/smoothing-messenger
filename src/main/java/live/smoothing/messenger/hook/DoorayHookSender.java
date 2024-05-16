@@ -1,7 +1,6 @@
 package live.smoothing.messenger.hook;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -14,16 +13,34 @@ import java.util.List;
 public class DoorayHookSender {
 
     private RestTemplate restTemplate;
+    private List<String> adminUrls;
+    private List<String> userUrls;
+    private List<String> allUrls;
 
-    private List<String> urls;
-
-    public void send(DoorayHook doorayHook) {
+    public void send(DoorayHook doorayHook, UserRole userRole) {
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<DoorayHook> entity = new HttpEntity<>(doorayHook, headers);
 
+        switch(userRole) {
+
+            case ROLE_ADMIN:
+                sendToUrls(adminUrls, entity);
+                break;
+
+            case ROLE_USER:
+                sendToUrls(userUrls, entity);
+                break;
+
+            default:
+                sendToUrls(allUrls, entity);
+                break;
+        }
+    }
+
+    private void sendToUrls(List<String> urls, HttpEntity<DoorayHook> entity) {
         for (String url : urls) {
-            ResponseEntity<String> exchange = this.restTemplate.exchange(url, HttpMethod.POST, entity, String.class, new Object[0]);
+            ResponseEntity<String> exchange = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
         }
     }
 

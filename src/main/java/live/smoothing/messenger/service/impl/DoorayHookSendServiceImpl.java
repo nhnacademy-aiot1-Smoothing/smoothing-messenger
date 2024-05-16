@@ -38,6 +38,6 @@ public class DoorayHookSendServiceImpl implements DoorayHookSendService {
     public void sendHook(DoorayHookDTO doorayHookDTO) {
 
         log.info("Received dooray message : {}", doorayHookDTO.getMessage());
-        doorayHookSender.send(DoorayHook.builder().botName("관리자").text(doorayHookDTO.getMessage()).build());
+        doorayHookSender.send(DoorayHook.builder().botName("관리자").text(doorayHookDTO.getMessage()).build(), doorayHookDTO.getUserRole());
     }
 }

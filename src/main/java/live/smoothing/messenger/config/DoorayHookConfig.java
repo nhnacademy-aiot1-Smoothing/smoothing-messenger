@@ -1,6 +1,7 @@
 package live.smoothing.messenger.config;
 
 import live.smoothing.messenger.hook.DoorayHookSender;
+import live.smoothing.messenger.hook.UserRole;
 import live.smoothing.messenger.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +25,10 @@ public class DoorayHookConfig {
     @Bean
     public DoorayHookSender doorayHookSender(RestTemplate restTemplate) {
 
-        List<String> urls = userService.getHookUrls(1);
-        return new DoorayHookSender(restTemplate, urls);
+        List<String> adminUrls = userService.getUrlsByUserRole(UserRole.ROLE_ADMIN, 1);
+        List<String> userUrls = userService.getUrlsByUserRole(UserRole.ROLE_USER, 1);
+        List<String> allUrls = userService.getHookUrls(1);
+
+        return new DoorayHookSender(restTemplate, adminUrls, userUrls, allUrls);
     }
 }
