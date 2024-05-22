@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Message Queue에서 메세지를 받아오는 클래스
+ * 받아온 메세지를 바탕으로 인증번호 발급 메일을 발송한다.
  *
  * @author 김지윤
  */

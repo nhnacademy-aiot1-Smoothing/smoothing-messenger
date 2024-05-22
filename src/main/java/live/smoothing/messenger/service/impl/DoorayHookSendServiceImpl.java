@@ -11,6 +11,11 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+/**
+ * Dooray hook을 보내기 위한 클래스
+ *
+ * @author 김지윤
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -26,6 +31,9 @@ public class DoorayHookSendServiceImpl implements DoorayHookSendService {
     @Value("${rabbitmq.hook-routing-key}")
     private String hookRoutingKey;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void sendToQueue(DoorayHookDTO doorayHookDTO) {
 
@@ -33,6 +41,9 @@ public class DoorayHookSendServiceImpl implements DoorayHookSendService {
         rabbitTemplate.convertAndSend(hookExchangeName, hookRoutingKey, doorayHookDTO);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @RabbitListener(queues = "${rabbitmq.hook-queue}")
     public void sendHook(DoorayHookDTO doorayHookDTO) {

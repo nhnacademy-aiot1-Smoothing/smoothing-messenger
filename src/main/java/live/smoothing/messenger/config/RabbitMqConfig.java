@@ -126,18 +126,35 @@ public class RabbitMqConfig {
         return new Jackson2JsonMessageConverter();
     }
 
+    /**
+     * hook 전송에 필요한 Queue 생성
+     *
+     * @return 생성된 Queue
+     */
     @Bean
     public Queue hookQueue() {
 
         return new Queue(hookQueueName);
     }
 
+    /**
+     * hook 전송에 필요한 Exchange 생성
+     *
+     * @return 생성된 Exchange
+     */
     @Bean
-    public  DirectExchange hookExchange() {
+    public DirectExchange hookExchange() {
 
         return new DirectExchange(hookExchangeName);
     }
 
+    /**
+     * routing key로 queue를 exchange에 binding
+     *
+     * @param hookQueue queue
+     * @param hookExchange exchange
+     * @return 생성된 Binding
+     */
     @Bean
     public Binding doorayHookBinding(Queue hookQueue, DirectExchange hookExchange) {
 

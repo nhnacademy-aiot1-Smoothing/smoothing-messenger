@@ -9,7 +9,11 @@ import live.smoothing.messenger.service.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * Mail을 전송하기 위한 클래스
+ *
+ * @author 김지윤
+ */
 @Service
 @RequiredArgsConstructor
 public class MailServiceImpl implements MailService {
@@ -18,12 +22,18 @@ public class MailServiceImpl implements MailService {
 
     private final MailAdapter mailAdapter;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public SendMailRequest writeMail(Receiver receiver, String title, String body) {
 
         return new SendMailRequest(senderInfo.getEmail(), senderInfo.getName(), title, body, receiver);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public SendMailResponse sendMail(String secret, SendMailRequest request) {
 

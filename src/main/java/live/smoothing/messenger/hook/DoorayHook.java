@@ -6,6 +6,11 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Dooray hook 요소 설정 클래스
+ *
+ * @author 김지윤
+ */
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
