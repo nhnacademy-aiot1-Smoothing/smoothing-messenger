@@ -17,7 +17,7 @@ public class DoorayHookController {
     @PostMapping("/sendHook")
     public ResponseEntity<Void> sendHook(@RequestBody DoorayHookDTO doorayHookDTO) {
 
-        doorayHookSendService.sendHook(doorayHookDTO);
+        doorayHookSendService.sendToQueue(doorayHookDTO);
 
         return ResponseEntity.ok().build();
     }
