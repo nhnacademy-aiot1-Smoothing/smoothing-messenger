@@ -30,8 +30,8 @@ public class MessageConsumerServiceImpl implements MessageConsumerService {
     @RabbitListener(queues = "${rabbitmq.queue.name}")
     public void receiveMessage(MessageDTO messageDTO) throws MessagingException, UnsupportedEncodingException { // Consumer 역할
 
-        log.info("Received Message :{}", messageDTO.toString());
+        log.info("Received Message :{}", messageDTO.getEventMessage());
 
-        mailSendService.sendMail(messageDTO);
+//        mailSendService.sendMail(messageDTO);
     }
 }

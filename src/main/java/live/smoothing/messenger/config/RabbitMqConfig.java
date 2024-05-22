@@ -38,6 +38,15 @@ public class RabbitMqConfig {
     @Value("${rabbitmq.routing.key}")
     private String routingKey;
 
+    @Value("${rabbitmq.hook-queue}")
+    private String hookQueueName;
+
+    @Value("${rabbitmq.hook-exchange-name}")
+    private String hookExchangeName;
+
+    @Value("${rabbitmq.hook-routing-key}")
+    private String hookRoutingKey;
+
     /**
      * Queue 생성
      *
@@ -55,7 +64,7 @@ public class RabbitMqConfig {
      * @return 생성된 Exchange
      */
     @Bean
-    public DirectExchange directExchange() {
+    public DirectExchange exchange() {
 
         return new DirectExchange(exchangeName);
     }
@@ -115,6 +124,24 @@ public class RabbitMqConfig {
     public MessageConverter jackson2JsonMessageConverter() {
 
         return new Jackson2JsonMessageConverter();
+    }
+
+    @Bean
+    public Queue hookQueue() {
+
+        return new Queue(hookQueueName);
+    }
+
+    @Bean
+    public  DirectExchange hookExchange() {
+
+        return new DirectExchange(hookExchangeName);
+    }
+
+    @Bean
+    public Binding doorayHookBinding(Queue hookQueue, DirectExchange hookExchange) {
+
+        return BindingBuilder.bind(hookQueue).to(hookExchange).with(hookRoutingKey);
     }
 
 }
