@@ -1,5 +1,6 @@
 package live.smoothing.messenger.hook;
 
+import live.smoothing.messenger.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -13,14 +14,17 @@ import java.util.List;
 public class DoorayHookSender {
 
     private RestTemplate restTemplate;
-    private List<String> adminUrls;
-    private List<String> userUrls;
-    private List<String> allUrls;
+
+    private final UserService userService;
 
     public void send(DoorayHook doorayHook, UserRole userRole) {
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<DoorayHook> entity = new HttpEntity<>(doorayHook, headers);
+
+        List<String> adminUrls = userService.getUrlsByUserRole(UserRole.ROLE_ADMIN, 1);
+        List<String> userUrls = userService.getUrlsByUserRole(UserRole.ROLE_USER, 1);
+        List<String> allUrls = userService.getHookUrls(1);
 
         switch(userRole) {
 
