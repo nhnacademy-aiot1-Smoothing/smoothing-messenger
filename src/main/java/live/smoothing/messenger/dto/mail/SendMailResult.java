@@ -1,15 +1,14 @@
 package live.smoothing.messenger.dto.mail;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 /**
  * Mail Response result DTO
  *
  * @author 김지윤
  */
-@Getter
-@NoArgsConstructor
+@JsonNaming(PropertyNamingStrategies.LowerCaseStrategy.class)
 public class SendMailResult {
 
     private String receiveMailAddr;
