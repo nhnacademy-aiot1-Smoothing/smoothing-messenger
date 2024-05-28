@@ -1,7 +1,5 @@
 package live.smoothing.messenger.dto.mail;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +10,8 @@ import java.util.List;
  *
  * @author 김지윤
  */
-@JsonNaming(PropertyNamingStrategies.LowerCaseStrategy.class)
+@Getter
+@NoArgsConstructor
 public class SendMailResponseData {
 
     private String requestId;

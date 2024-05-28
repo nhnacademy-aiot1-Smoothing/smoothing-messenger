@@ -1,14 +1,15 @@
 package live.smoothing.messenger.dto.mail;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * 메일 발송 시 서버의 응답 메세지를 담고있는 DTO
  *
  * @author 김지윤
  */
-@JsonNaming(PropertyNamingStrategies.LowerCaseStrategy.class)
+@Getter
+@NoArgsConstructor
 public class SendMailResponse {
 
     private Header header;

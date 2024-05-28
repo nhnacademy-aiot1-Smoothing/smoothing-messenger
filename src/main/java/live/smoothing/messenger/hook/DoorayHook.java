@@ -1,6 +1,7 @@
 package live.smoothing.messenger.hook;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
  *
  * @author 김지윤
  */
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class DoorayHook {
