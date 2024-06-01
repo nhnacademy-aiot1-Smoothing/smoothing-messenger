@@ -1,0 +1,9 @@
+### 두레이 훅 전송
+POST http://localhost:8010/sendHook
+Content-Type: application/json
+
+{
+  "userRole": "ALL",
+  "message": "전체 메세지"
+}
+
