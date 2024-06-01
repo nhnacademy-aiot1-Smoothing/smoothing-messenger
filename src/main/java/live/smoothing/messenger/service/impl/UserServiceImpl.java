@@ -11,12 +11,20 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 회원이 설정한 hook url을 가져오기 위한 클래스
+ *
+ * @author 김지윤
+ */
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserAdapter userAdapter;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getHookUrls(Integer hookTypeId) {
 
@@ -30,6 +38,9 @@ public class UserServiceImpl implements UserService {
         return hookUrls;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getUrlsByUserRole(UserRole userRole, Integer hookTypeId) {
 
